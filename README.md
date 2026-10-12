@@ -1,6 +1,6 @@
 # Awesome-Modern-Relationship-Intelligence
 
-# Top Modern Relationship Intelligence Tools Ecosystem
+## Top Modern Relationship Intelligence Tools Ecosystem
 
 **Curated List of SaaS Products & Open-Source GitHub Projects**  
 *Focused on Relationship Mapping, Network Graph Analytics & CRM Data Enrichment*  
