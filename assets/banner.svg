@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="360">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradient -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="nodeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <linearGradient id="nodeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+
+    <linearGradient id="nodeGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="slightGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .bg-grid { stroke: rgba(255, 255, 255, 0.04); stroke-width: 1; }
+    .network-line { stroke: rgba(129, 140, 248, 0.28); stroke-width: 1.5; stroke-dasharray: 6 4; }
+    
+    @keyframes pulsePulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+    
+    @keyframes orbitNode {
+      0% { transform: rotate(0deg) translate(60px) rotate(0deg); }
+      100% { transform: rotate(360deg) translate(60px) rotate(-360deg); }
+    }
+
+    @keyframes lineFlow {
+      0% { stroke-dashoffset: 40; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes particleDrift {
+      0% { transform: translateY(0px) scale(0.9); opacity: 0.3; }
+      50% { transform: translateY(-15px) scale(1.1); opacity: 0.8; }
+      100% { transform: translateY(0px) scale(0.9); opacity: 0.3; }
+    }
+
+    .pulse-node { animation: pulsePulse 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .pulse-node-fast { animation: pulsePulse 2.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .orbiting-1 { animation: orbitNode 12s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .moving-edge { animation: lineFlow 3s linear infinite; }
+    .drift-particle { animation: particleDrift 5s ease-in-out infinite; }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1200" height="360" rx="16" fill="url(#bgGrad)" />
+
+  <!-- Abstract Grid Lines (Deep Background) -->
+  <line x1="0" y1="90" x2="1200" y2="90" class="bg-grid" />
+  <line x1="0" y1="180" x2="1200" y2="180" class="bg-grid" />
+  <line x1="0" y1="270" x2="1200" y2="270" class="bg-grid" />
+  <line x1="240" y1="0" x2="240" y2="360" class="bg-grid" />
+  <line x1="480" y1="0" x2="480" y2="360" class="bg-grid" />
+  <line x1="720" y1="0" x2="720" y2="360" class="bg-grid" />
+  <line x1="960" y1="0" x2="960" y2="360" class="bg-grid" />
+
+  <!-- Background Floating Network Topology (Dynamic aspect in background) -->
+  <g opacity="0.65">
+    <!-- Left side graph mesh -->
+    <line x1="80" y1="70" x2="190" y2="120" class="network-line moving-edge" />
+    <line x1="190" y1="120" x2="130" y2="240" class="network-line" />
+    <line x1="130" y1="240" x2="60" y2="290" class="network-line moving-edge" />
+    <line x1="190" y1="120" x2="270" y2="210" class="network-line moving-edge" />
+    <line x1="80" y1="70" x2="270" y2="210" class="network-line" />
+
+    <circle cx="80" cy="70" r="14" fill="url(#nodeGrad1)" filter="url(#glow)" class="pulse-node" />
+    <circle cx="190" cy="120" r="20" fill="url(#nodeGrad2)" filter="url(#glow)" class="pulse-node-fast" />
+    <circle cx="130" cy="240" r="16" fill="url(#nodeGrad3)" filter="url(#glow)" class="pulse-node" />
+    <circle cx="60" cy="290" r="12" fill="url(#nodeGrad1)" opacity="0.8" class="drift-particle" />
+    <circle cx="270" cy="210" r="15" fill="url(#nodeGrad2)" filter="url(#slightGlow)" class="pulse-node" />
+
+    <!-- Right side graph mesh -->
+    <line x1="1100" y1="80" x2="1020" y2="150" class="network-line moving-edge" />
+    <line x1="1020" y1="150" x2="1090" y2="260" class="network-line" />
+    <line x1="1020" y1="150" x2="920" y2="220" class="network-line moving-edge" />
+    <line x1="920" y1="220" x2="980" y2="300" class="network-line" />
+    <line x1="1100" y1="80" x2="920" y2="220" class="network-line moving-edge" />
+
+    <circle cx="1100" cy="80" r="16" fill="url(#nodeGrad2)" filter="url(#glow)" class="pulse-node" />
+    <circle cx="1020" cy="150" r="22" fill="url(#nodeGrad1)" filter="url(#glow)" class="pulse-node-fast" />
+    <circle cx="1090" cy="260" r="14" fill="url(#nodeGrad3)" filter="url(#slightGlow)" class="pulse-node" />
+    <circle cx="920" cy="220" r="18" fill="url(#nodeGrad2)" filter="url(#glow)" class="pulse-node" />
+    <circle cx="980" cy="300" r="12" fill="url(#nodeGrad1)" opacity="0.8" class="drift-particle" />
+
+    <!-- Subtle Connection Arc Across Screen Bottom -->
+    <path d="M 130 240 Q 600 320 1090 260" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="2" stroke-dasharray="8 6" class="moving-edge" />
+  </g>
+
+  <!-- Foreground Content Container (Ensures 100% Crisp Visibility & Readability) -->
+  <g transform="translate(600, 0)">
+    <!-- Category Badge Pill -->
+    <rect x="-180" y="45" width="360" height="34" rx="17" fill="rgba(30, 41, 59, 0.85)" stroke="rgba(129, 140, 248, 0.5)" stroke-width="1.2" />
+    <circle cx="-150" cy="62" r="5" fill="#38bdf8" class="pulse-node-fast" />
+    <text x="-135" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#93c5fd" letter-spacing="1.5">
+      RELATIONSHIP INTELLIGENCE &amp; GRAPH CRM
+    </text>
+
+    <!-- Main Title -->
+    <text x="0" y="145" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="800" fill="url(#textGrad)" letter-spacing="-0.5">
+      Modern Relationship Intelligence
+    </text>
+
+    <!-- Subtitle / Value Proposition -->
+    <text x="0" y="195" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="19" font-weight="400" fill="#cbd5e1" letter-spacing="0.2">
+      Curated Ecosystem of Network Graph Analytics, Warm Introductions &amp; CRM Enrichment
+    </text>
+
+    <!-- Feature Tags Row -->
+    <g transform="translate(0, 255)">
+      <!-- Tag 1 -->
+      <g transform="translate(-270, 0)">
+        <rect x="-10" y="-18" width="165" height="34" rx="10" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1" />
+        <text x="72" y="4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#38bdf8">
+          🌐 Graph Databases
+        </text>
+      </g>
+
+      <!-- Tag 2 -->
+      <g transform="translate(-80, 0)">
+        <rect x="-10" y="-18" width="165" height="34" rx="10" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(129, 140, 248, 0.3)" stroke-width="1" />
+        <text x="72" y="4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#818cf8">
+          🤝 Warm Pathfinding
+        </text>
+      </g>
+
+      <!-- Tag 3 -->
+      <g transform="translate(110, 0)">
+        <rect x="-10" y="-18" width="175" height="34" rx="10" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(192, 132, 252, 0.3)" stroke-width="1" />
+        <text x="77" y="4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#c084fc">
+          ⚡ Entity Resolution
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
